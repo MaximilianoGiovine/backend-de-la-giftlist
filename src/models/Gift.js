@@ -8,11 +8,12 @@ const GiftSchema = new Schema({
         required: true
     },
     status: {
-        type:String,
+        type: String,
         required: true,
         enum: ['regalar', 'regalado'],
         default: 'regalar'
-    }})
+    }
+});
 
 const Gift = mongoose.model('Gift', GiftSchema);
 
