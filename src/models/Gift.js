@@ -10,8 +10,8 @@ const GiftSchema = new Schema({
     status: {
         type: String,
         required: true,
-        enum: ['regalar', 'regalado'],
-        default: 'regalar'
+        enum: ['disponible', 'regalado'],
+        default: 'disponible'
     }
 });
 
