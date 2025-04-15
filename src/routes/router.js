@@ -10,4 +10,8 @@ router.get('/', getGift);
 router.post('/', postGift )
 router.put('/', fetchGiftByName, putGift )
 
+router.get('/test', (req, res) => {
+    res.status(200).send('Test route is working!');
+});
+
 module.exports = router;
