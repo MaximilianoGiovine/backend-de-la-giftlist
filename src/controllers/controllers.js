@@ -1,4 +1,5 @@
 const { getGiftService, postGiftService, putGiftService } = require('../services/giftService');
+const { Gift } = require('../models/Gift.js');
 
 const getGift = async (req, res) => {
     try {
@@ -15,11 +16,16 @@ const getGift = async (req, res) => {
 
 const postGift = async (req, res) => {
     try {
-        const giftData = req.body; // Obtener los datos del regalo desde el cuerpo de la solicitud
-        const newGift = await postGiftService(giftData); // Llamar al servicio para crear el regalo
-        res.status(201).json(newGift); // Retornar el regalo creado
+        const { gift, status } = req.body;
+
+        // Crea un nuevo regalo
+        const newGift = new Gift({ gift, status });
+        const savedGift = await newGift.save();
+
+        res.status(201).json(savedGift); // Devuelve el regalo guardado
     } catch (error) {
-        res.status(500).json({ message: error.message }); // Manejo de errores
+        console.error('Error al agregar el regalo:', error);
+        res.status(500).json({ error: 'Error interno del servidor.' });
     }
 };
 
