@@ -2,7 +2,10 @@ const { Gift } = require('../models/Gift.js'); // Importa el modelo Gift
 
 const checkUniqueGift = async (req, res, next) => {
     try {
-        const { gift } = req.body; // Obtén el nombre del regalo desde el cuerpo de la solicitud
+        let { gift } = req.body; // Obtén el nombre del regalo desde el cuerpo de la solicitud
+
+        // Normaliza el texto: convierte a minúsculas y elimina espacios adicionales
+        gift = gift.trim().toLowerCase();
 
         // Verifica si el regalo ya existe en la base de datos
         const existingGift = await Gift.findOne({ gift });
